@@ -2,7 +2,7 @@
 #include "WPILIB.h"
 
 using namespace CORE;
-	void COREPID::calculate(int profile) {
+	void ManualPID::calculate(int profile) {
 		if(profile == 1) {
 			PID1.porportional = (PID.setPoint - PID.actualPosition) * PID1.P;
 			PID1.mistake.insert(PID1.mistake.begin(), PID1.porportional);
@@ -30,67 +30,67 @@ using namespace CORE;
 			PID2.output = PID2.porportional + PID2.integral + PID2.derivative;
 		}
 	}
-	void COREPID::setPoint(double setPoint) {
+	void ManualPID::setPoint(double setPoint) {
 		PID.setPoint = setPoint;
 	}
-	double COREPID::getSetPoint() {
+	double ManualPID::getSetPoint() {
 		return PID.setPoint;
 	}
-	double COREPID::getP(int profile) {
+	double ManualPID::getP(int profile) {
 		if(profile == 1)
 			return PID1.P;
 		else
 			return PID2.P;
 	}
-	double COREPID::getI(int profile) {
+	double ManualPID::getI(int profile) {
 		if(profile == 1)
 			return PID1.I;
 		else
 			return PID2.I;
 	}
-	double COREPID::getD(int profile) {
+	double ManualPID::getD(int profile) {
 		if(profile == 1)
 			return PID1.D;
 		else
 			return PID2.D;
 	}
-	void COREPID::setP(double value, int profile) {
+	void ManualPID::setP(double value, int profile) {
 		if(profile == 1)
 			PID1.P = value;
 		else
 			PID2.P = value;
 	}
-	void COREPID::setI(double value, int profile) {
+	void ManualPID::setI(double value, int profile) {
 		if(profile == 1)
 			PID1.I = value;
 		else
 			PID2.I = value;
 	}
-	void COREPID::setD(double value, int profile) {
+	void ManualPID::setD(double value, int profile) {
 		if(profile == 1)
 			PID1.D = value;
 		else
 			PID2.D = value;
 	}
-	double COREPID::getOutput(int profile) {
+	double ManualPID::getOutput(int profile) {
 		if(profile == 1)
 			return PID1.output;
 		else
 			return PID2.output;
 	}
-	double COREPID::getPorportional(int profile) {
+	double ManualPID::getPorportional(int profile) {
 		if(profile == 1)
 			return PID1.porportional;
 		else
 			return PID2.porportional;
 	}
-	double COREPID::getIntegral(int profile) {
+	double ManualPID::getIntegral(int profile) {
 		if(profile == 1)
 			return PID1.integral;
 		else
 			return PID2.integral;
 	}
-	double COREPID::getDerivative(int profile) {
+	double ManualPID::getDerivative(int profile) {
 		if(profile == 1)
 			return PID1.derivative;
 		else

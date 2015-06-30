@@ -4,11 +4,7 @@
 #include "WPILIB.h"
 
 namespace CORE {
-enum PIDType {
-	MANUAL,
-	TALONSRX
-};
-class COREPID {
+class ManualPID {
 private:
 	struct {
 		double P,I,D,porportional,integral,derivative,output;
@@ -22,7 +18,7 @@ private:
 public:
 	static const int PROFILE1 = 1;
 	static const int PROFILE2 = 2;
-	COREPID(PIDType type, double pProfile1Value, double iProfile1Value, double dProfile1Value, double pProfile2Value = 0, double iProfile2Value = 0, double dProfile2Value = 0, int integralAccuracy = 1) {
+	ManualPID(double pProfile1Value, double iProfile1Value, double dProfile1Value, double pProfile2Value = 0, double iProfile2Value = 0, double dProfile2Value = 0, int integralAccuracy = 1) {
 		PID1.P = pProfile1Value;
 		PID1.I = iProfile1Value;
 		PID1.D = dProfile1Value;
