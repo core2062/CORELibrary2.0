@@ -3,6 +3,7 @@
 #define COREAUTO_H
 
 #include <vector>
+#include <string>
 #include "CORERobot.h"
 
 namespace CORE{
@@ -48,7 +49,7 @@ class Action{
 
 	virtual void autoCall(void) = 0;
 	virtual void init(void) = 0;
-	~Action(void){
+	virtual ~Action(void){
 
 	};
 

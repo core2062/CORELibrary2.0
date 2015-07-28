@@ -1,6 +1,6 @@
 #include "COREAuto.h"
 
-
+using namespace CORE;
 
 
 void AutoControl::iter(){
