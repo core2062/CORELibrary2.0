@@ -31,7 +31,7 @@ public:
 
 	void Autonomous()
 	{
-		TestAction test(robot,conditions::testStart,conditions::testEnd);
+//		TestAction test(robot,&conditions::testStart,&conditions::testEnd);
 
 
 	}

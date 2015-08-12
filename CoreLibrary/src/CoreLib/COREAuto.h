@@ -11,35 +11,34 @@
 namespace CORE{
 
 
-class Action{
+class ConditionAction{
 	CORERobot& robot;
-	bool (conditions::*condition)(void);
-	bool (conditions::*endCondition)(void);
+//	bool (conditions::*condition)(void);
+//	bool (conditions::*endCondition)(void);
 	bool active = false;
-
+	virtual bool startCondition() = 0;
+	virtual bool endCondition() = 0;
 
 	bool firstTest(){
 		return true;
 	}
 
 	void test(){
-		if ((this->(*condition))()){
+		if (startCondition()){
 			active = true;
 			init();
 		}
 	}
 
 	void endTest(){
-		if (conditions::*endCondition()){
+		if (endCondition()){
 //			~Action();
 		}
 	}
 
 	public:
-		Action(CORERobot& robot, bool (conditions::*cond) (void), bool (conditions::*endCond) (void)):
+		ConditionAction(CORERobot& robot):
 			robot(robot){
-			condition = cond;
-			endCondition = endCond;
 		};
 //		Action(CORERobot& robot, bool x):
 //			robot(robot){
@@ -59,22 +58,66 @@ class Action{
 
 	virtual void autoCall(void) = 0;
 	virtual void init(void) = 0;
-	virtual ~Action(void){
+	virtual ~ConditionAction(void){
 
 	};
 
 
 };
 
+class OrderAction{
+	CORERobot& robot;
+//	bool (conditions::*condition)(void);
+//	bool (conditions::*endCondition)(void);
+	bool active = false;
+
+	bool firstTest(){
+		return true;
+	}
+
+
+
+
+
+	public:
+		OrderAction(CORERobot& robot):
+			robot(robot){
+		};
+//		Action(CORERobot& robot, bool x):
+//			robot(robot){
+//			condition = firstTest;
+//		};
+
+
+
+	void call(){
+		if (active){
+			autoCall();
+//			endTest();
+		}else{
+//			test();
+		}
+	}
+
+	virtual void autoCall(void) = 0;
+	virtual void init(void) = 0;
+	virtual ~OrderAction(void){
+
+	};
+
+
+};
+
+
 class AutoControl{
-	std::vector<Action*> actions;
+	std::vector<OrderAction*> actions;
 
 public:
 	AutoControl():
 		actions(){};
 
 	void iter (void);
-	void add (Action* a){
+	void add (OrderAction* a){
 		actions.push_back(a);
 	}
 

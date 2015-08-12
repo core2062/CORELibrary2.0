@@ -12,13 +12,13 @@
 
 using namespace CORE;
 
-class TestAction : public Action{
+class TestAction : public OrderAction{
 
 public:
 
-	TestAction(CORERobot& robot, bool (*cond) (void), bool (*endCond) (void)):
-		Action(robot, cond , endCond)
-	{}
+//	TestAction(CORERobot& robot, bool (*cond) (void), bool (*endCond) (void)):
+//		Action(robot, cond , endCond)
+//	{}
 
 
 	void init(){}

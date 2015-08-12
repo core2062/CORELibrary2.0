@@ -8,7 +8,7 @@
 #ifndef SRC_CONDITIONS_H_
 #define SRC_CONDITIONS_H_
 
-namespace CORE{
+//namespace CORE{
 
 class conditions{
 
@@ -31,7 +31,7 @@ public:
 
 
 
-}
+//}
 
 
 #endif /* SRC_CONDITIONS_H_ */
