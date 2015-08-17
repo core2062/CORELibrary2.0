@@ -16,8 +16,6 @@ private:
 		Timer timer;
 	}PID;
 public:
-	static const int PROFILE1 = 1;
-	static const int PROFILE2 = 2;
 	ManualPID(double pProfile1Value, double iProfile1Value, double dProfile1Value, double pProfile2Value = 0, double iProfile2Value = 0, double dProfile2Value = 0, int integralAccuracy = 1) {
 		PID1.P = pProfile1Value;
 		PID1.I = iProfile1Value;
@@ -51,4 +49,4 @@ public:
 	double getDerivative(int profile = 1);
 };
 }
-#endif /* SRC_CORELIBRARY_COREPID_H_ */
+#endif
