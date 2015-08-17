@@ -4,9 +4,9 @@
 #include "WPILIB.h"
 
 namespace CORE {
-class ManualPID {
+class COREPID {
 private:
-	struct {
+	struct PIDProfile{
 		double P,I,D,porportional,integral,derivative,output;
 		std::vector<double> mistake;
 	}PID1, PID2;
@@ -16,7 +16,7 @@ private:
 		Timer timer;
 	}PID;
 public:
-	ManualPID(double pProfile1Value, double iProfile1Value, double dProfile1Value, double pProfile2Value = 0, double iProfile2Value = 0, double dProfile2Value = 0, int integralAccuracy = 1) {
+	COREPID(double pProfile1Value, double iProfile1Value, double dProfile1Value, double pProfile2Value = 0, double iProfile2Value = 0, double dProfile2Value = 0, int integralAccuracy = 1) {
 		PID1.P = pProfile1Value;
 		PID1.I = iProfile1Value;
 		PID1.D = dProfile1Value;
