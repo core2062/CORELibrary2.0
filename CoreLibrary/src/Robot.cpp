@@ -14,7 +14,7 @@ class Robot: public SampleRobot
 public:
 	Robot() :
 		robot(),
-		autoControl()
+		autoControl(robot)
 	{
 
 	}
@@ -32,7 +32,8 @@ public:
 	void Autonomous()
 	{
 //		TestAction test(robot,&conditions::testStart,&conditions::testEnd);
-
+		TestAction test(robot);
+		autoControl.add(test);
 
 	}
 

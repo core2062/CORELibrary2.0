@@ -12,18 +12,26 @@
 
 using namespace CORE;
 
-class TestAction : public OrderAction{
+class TestAction : public ConditionAction{
 
 public:
 
 //	TestAction(CORERobot& robot, bool (*cond) (void), bool (*endCond) (void)):
 //		Action(robot, cond , endCond)
 //	{}
-
+	virtual bool startCondition(){
+		return false;
+	}
+	virtual bool endCondition(){
+		return false;
+	}
+	TestAction(CORERobot& robot):
+		ConditionAction(robot){
+	};
 
 	void init(){}
 
-	void autoCall(){}
+	ControlFlow autoCall(){}
 
 	~TestAction(){
 
