@@ -22,37 +22,31 @@ enum ControlFlow{
 class Action{
 	bool active = false;
 
-
-
-	bool firstTest(){
-		return true;
-	}
-
-
 	public:
 
 	std::string name = "Base";
 
 	Action(){};
 
-
-
-	virtual bool startCondition() = 0;
-	virtual bool backgroundCondition(){
+	virtual bool startCondition(int pos = -1){
 		return false;
 	}
-	virtual bool endCondition(){
+	virtual bool backgroundCondition(int pos = -1){
+		return false;
+	}
+	virtual bool endCondition(int pos = -1){
 		return false;
 	}
 
 
 
-	virtual ControlFlow call() = 0;
+	virtual ControlFlow call(int pos = -1) = 0;
 
 	virtual ControlFlow autoCall(void){
 		return END;
 	};
 	virtual void init(void) = 0;
+	virtual void end(void) = 0;
 	virtual ~Action(void){
 
 	};
@@ -66,24 +60,6 @@ class ConditionAction : public Action{
 //	bool (conditions::*endCondition)(void);
 	bool active = false;
 
-
-	bool firstTest(){
-		return true;
-	}
-
-	void test(){
-		if (startCondition()){
-			active = true;
-			init();
-		}
-	}
-
-	void endTest(){
-		if (endCondition()){
-//			~Action();
-		}
-	}
-
 	public:
 		ConditionAction(CORERobot& robot):
 			robot(robot){
@@ -95,18 +71,36 @@ class ConditionAction : public Action{
 
 
 
-	ControlFlow call(){
+	ControlFlow call( int pos = -1){
+		if (startCondition(pos) && !active){
+			active = true;
+			init();
+		}
 		if (active){
-			autoCall();
-			endTest();
+			ControlFlow f = autoCall();
+			if (f!=CONTINUE){
+				if (f == END){
+					active = false;
+					end();
+				}
+				return f;
+			}else{
+				if (endCondition(pos)){
+					active = false;
+					end();
+					return END;
+				}else{
+					return CONTINUE;
+				}
+			}
 		}else{
-			test();
 		}
 		return END;
 	}
 
 	virtual ControlFlow autoCall(void) = 0;
 	virtual void init(void) = 0;
+	virtual void end(void) = 0;
 	virtual ~ConditionAction(void){
 
 	};
@@ -120,14 +114,6 @@ class OrderAction : public Action{
 //	bool (conditions::*endCondition)(void);
 	bool active = false;
 
-	bool firstTest(){
-		return true;
-	}
-
-
-
-
-
 	public:
 		OrderAction(CORERobot& robot):
 			robot(robot){
@@ -139,15 +125,19 @@ class OrderAction : public Action{
 
 
 
-	ControlFlow call(){
+	ControlFlow call(int pos = -1){
 		ControlFlow f = autoCall();
 		if (f!=CONTINUE){
+			if (f == END){
+				end();
+			}
 			return f;
 		}else{
-			if (backgroundCondition()){
-				return BACKGROUND;
-			}else if (endCondition()){
+			if (endCondition(pos)){
+				end();
 				return END;
+			}else if (backgroundCondition(pos)){
+				return BACKGROUND;
 			}else{
 				return CONTINUE;
 			}
@@ -156,6 +146,7 @@ class OrderAction : public Action{
 
 //	virtual ControlFlow autoCall(void) = 0;
 	virtual void init(void) = 0;
+	virtual void end(void) = 0;
 	virtual ~OrderAction(void){
 
 	};
@@ -169,6 +160,7 @@ class AutoControl{
 	std::queue<OrderAction*> aqueue;
 	std::vector<Action*> background;
 	bool queueEmpty = false;
+	int position = 1;
 public:
 	AutoControl(CORERobot& robot):
 		robot(robot),

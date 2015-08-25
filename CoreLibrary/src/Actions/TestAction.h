@@ -30,8 +30,10 @@ public:
 	};
 
 	void init(){}
-
-	ControlFlow autoCall(){}
+	void end(){}
+	ControlFlow autoCall(){
+		return CONTINUE;
+	}
 
 	~TestAction(){
 

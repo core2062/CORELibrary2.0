@@ -12,7 +12,7 @@ void AutoControl::iter(){
 
 	Action* a = aqueue.front();
 
-	ControlFlow returnVal = a->call();
+	ControlFlow returnVal = a->call(position);
 
 	switch(returnVal){
 	case CONTINUE:
@@ -23,6 +23,7 @@ void AutoControl::iter(){
 		background.push_back(a);
 		/* no break */
 	case END:
+		position++;
 		aqueue.pop();
 		if(!aqueue.empty()){
 			a = aqueue.front();
@@ -33,7 +34,7 @@ void AutoControl::iter(){
 
 	std::vector<Action*>::iterator it = background.begin();
 	while(it != background.end()){
-		ControlFlow return_val = (*it)->call();
+		ControlFlow return_val = (*it)->call(position);
 		if (return_val == END){
 			it = background.erase(it);
 		}else{
