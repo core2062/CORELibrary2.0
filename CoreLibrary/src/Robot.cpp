@@ -2,7 +2,6 @@
 #include "CoreLib/CORERobot.h"
 #include "CoreLib/CoreAuto.h"
 #include "Actions/TestAction.h"
-#include "conditions.h"
 
 using namespace CORE;
 
