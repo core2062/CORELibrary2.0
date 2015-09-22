@@ -18,11 +18,15 @@ class CORESubsystem;
 
 class CORERobot {
 	std::vector<CORESubsystem*> subsystems;
+
+
+public:
+
 	std::map<motors,CANSpeedController*> motorMap;
 	std::map<digitalSensors,DigitalInput*> digitalSensorMap;
 	std::map<analogSensors,AnalogInput*> analogSensorMap;
 
-public:
+
 	JoystickCache joystick;
 	Log outLog;
 //	COREDash CD;
