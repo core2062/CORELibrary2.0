@@ -6,8 +6,6 @@
 #include <string>
 #include <queue>
 #include "CORERobot.h"
-#include "conditions.h"
-
 
 namespace CORE{
 

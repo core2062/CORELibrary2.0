@@ -2,13 +2,15 @@
 #define CORESUBSYSTEM_H
 
 #include <string>
-
 #include "WPILib.h"
-//#include "JoystickCache.h"
 //#include "COREAuto.h"
 //#include "COREDrive.h"
 #include "log.h"
 //#include "COREDashboard.h"
+#include <vector>
+#include <map>
+#include "Constants.h"
+#include "JoystickCache.h"
 
 namespace CORE {
 
@@ -16,15 +18,23 @@ class CORESubsystem;
 
 class CORERobot {
 	std::vector<CORESubsystem*> subsystems;
+
+
 public:
-//	JoystickCache joystick;
+
+	std::map<motors,CANSpeedController*> motorMap;
+	std::map<digitalSensors,DigitalInput*> digitalSensorMap;
+	std::map<analogSensors,AnalogInput*> analogSensorMap;
+
+
+	JoystickCache joystick;
 	Log outLog;
 //	COREDash CD;
 //	AutoControl autoControl;
 
 	CORERobot():
 		subsystems(),
-//		joystick(),
+		joystick(),
 		outLog()//,
 //		autoControl()
 //		CD(outLog)
@@ -38,6 +48,9 @@ public:
 	void teleopInit(void);
 	void teleop(void);
 	void teleopEnd(void);
+	void addMotor(motors motors,CANSpeedController* motor);
+	void addDigitalSensor(digitalSensors digitalSensors,DigitalInput* sensor);
+	void addAnalogSensor(analogSensors analogSensors,AnalogInput* sensor);
 
 	~CORERobot(){
 	}
