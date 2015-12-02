@@ -2,6 +2,8 @@
 #define SRC_CORELIBRARY_COREPID_H_
 #include <vector>
 #include "WPILIB.h"
+#include "CORERobot.h"
+
 
 namespace CORE {
 class COREPID {
