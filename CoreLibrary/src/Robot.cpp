@@ -2,6 +2,7 @@
 #include "CoreLib/CORERobot.h"
 #include "CoreLib/CoreAuto.h"
 #include "Actions/TestAction.h"
+#include "Subsystems/Subsytems.h"
 
 using namespace CORE;
 
@@ -39,10 +40,10 @@ public:
 
 	void OperatorControl()
 	{
-
+		robot.teleopInit();
 		while (IsOperatorControl() && IsEnabled())
 		{
-
+			robot.teleop();
 			Wait(0.005);				// wait for a motor update time
 		}
 	}
