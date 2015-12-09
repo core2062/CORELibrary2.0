@@ -4,21 +4,7 @@
 using namespace CORE;
 	void COREPID::calculate(int profile) {
 		struct PIDProfile *currentProfile = profile == 1 ? &PID1 : &PID2;
-		currentProfile->porportional = (PID.setPoint - PID.actualPosition) * currentProfile->P;
-		currentProfile->mistake.insert(currentProfile->mistake.begin(), currentProfile->porportional);
-		double sum = 0;
-		for(int i = 1; i < (int) currentProfile->mistake.size(); i++) {
-			sum += currentProfile->mistake[i];
-		}
-		double time = PID.timer.Get();
-		currentProfile->integral += (sum * time) * currentProfile->I;
-		currentProfile->derivative = ((currentProfile->mistake[0] - currentProfile->mistake[1]) / time) * currentProfile->D;
-		PID.timer.Reset();
-		currentProfile->output = currentProfile->porportional + currentProfile->integral + currentProfile->derivative;
-	}
-	void COREPID::setPoint(double setPoint) {
-		PID.setPoint = setPoint;
-	}
+
 	double COREPID::getSetPoint() {
 		return PID.setPoint;
 	}
