@@ -2,7 +2,7 @@
 #include "CoreLib/CORERobot.h"
 #include "CoreLib/CoreAuto.h"
 #include "Actions/TestAction.h"
-#include "Subsystems/Subsytems.h"
+#include "Subsytems.h"
 
 using namespace CORE;
 
@@ -10,13 +10,18 @@ class Robot: public SampleRobot
 {
 	CORERobot robot;
 	AutoControl autoControl;
+	LiftSubsystem lift;
+	DriveSubsystem drive;
 
 public:
 	Robot() :
 		robot(),
-		autoControl(robot)
+		autoControl(robot),
+		lift(robot),
+		drive(robot)
 	{
-
+		robot.add(lift);
+		robot.add(drive);
 	}
 
 
@@ -34,6 +39,11 @@ public:
 //		TestAction test(robot,&conditions::testStart,&conditions::testEnd);
 		TestAction test(robot);
 		autoControl.add(test);
+		autoControl.init();
+		while (IsAutonomous() and !IsDisabled()) {
+			autoControl.iter();
+			Wait(robot.getLoopWait());
+		}
 
 	}
 
@@ -44,8 +54,13 @@ public:
 		while (IsOperatorControl() && IsEnabled())
 		{
 			robot.teleop();
-			Wait(0.005);				// wait for a motor update time
+			SmartDashboard::PutNumber("topLiftLim", robot.digitalSensorMap[digitalSensors::BOT_LIFT_LIMIT]->Get());
+			SmartDashboard::PutNumber("botLiftLim", robot.digitalSensorMap[digitalSensors::TOP_LIFT_LIMIT]->Get());
+			SmartDashboard::PutNumber("motorVal", robot.motorMap[motors::LIFT_MOTOR]->Get());
+			SmartDashboard::PutNumber("joyval", robot.joystick.axis(controllerInputs::LIFT_AXIS));
+			Wait(robot.getLoopWait());				// wait for a motor update time
 		}
+		robot.teleopEnd();
 	}
 
 	/**

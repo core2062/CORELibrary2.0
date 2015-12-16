@@ -24,6 +24,8 @@ public:
 
 	JoystickCache joystick;
 	Log outLog;
+	Timer loopTimer;
+	bool loopStarted = false;
 //	COREDash CD;
 //	AutoControl autoControl;
 
@@ -46,6 +48,8 @@ public:
 	void addMotor(motors motors,CANSpeedController* motor);
 	void addDigitalSensor(digitalSensors digitalSensors,DigitalInput* sensor);
 	void addAnalogSensor(analogSensors analogSensors,AnalogInput* sensor);
+
+	double getLoopWait();
 
 	~CORERobot(){
 	}

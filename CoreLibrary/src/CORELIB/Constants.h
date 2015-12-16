@@ -12,16 +12,21 @@
 #include <string>
 
 enum motors{
-
+	LIFT_MOTOR
 };
 
 
 enum controllerInputs{
-	LIFT_AXIS
+	LIFT_AXIS,
+	DRIVE_Y,
+	DRIVE_X,
+	DRIVE_ROT,
+	DRIVE_SPEED
 };
 
 enum digitalSensors{
-
+	BOT_LIFT_LIMIT,
+	TOP_LIFT_LIMIT
 };
 
 enum analogSensors{

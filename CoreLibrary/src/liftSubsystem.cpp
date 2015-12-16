@@ -23,7 +23,6 @@
 
 		if (!bottomLimit.Get()){
 			bottomLatch = true;
-			liftMotor.SetPosition(0);
 		}
 		if (!topLimit.Get()){
 			topLatch = true;

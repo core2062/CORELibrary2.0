@@ -40,6 +40,7 @@ void Log::printLog(){
 	for (it = lines.begin(); it != lines.end(); ++it){
 		outFile << (*it).c_str() << std::endl;
 	}
+	lines.clear();
 }
 
 
