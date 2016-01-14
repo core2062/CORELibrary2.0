@@ -14,15 +14,15 @@
 
 using namespace CORE;
 
-void JoystickCache::register_axis (controllerInputs name, int joystick, int axis){
+void JoystickCache::register_axis (ControllerInput name, int joystick, int axis){
 	axes.insert(j_map::value_type(name, j_key(joystick, axis, NORMAL)));
 }
 
-void JoystickCache::register_button(controllerInputs name, int joystick, int button){
+void JoystickCache::register_button(ControllerInput name, int joystick, int button){
 	register_button(name, joystick, button, NORMAL);
 }
 
-void JoystickCache::register_button(controllerInputs name, int joystick, int button, Metadata type){
+void JoystickCache::register_button(ControllerInput name, int joystick, int button, Metadata type){
 	buttons.insert(j_map::value_type(name, j_key(joystick, button, type)));
 	old_buttons.insert(b_cache::value_type(name, false));
 }
@@ -53,11 +53,11 @@ void JoystickCache::update_cache(void){
 	}
 }
 
-double JoystickCache::axis(controllerInputs name){
+double JoystickCache::axis(ControllerInput name){
 	return cached_axes[name];
 }
 
-bool JoystickCache::button(controllerInputs name){
+bool JoystickCache::button(ControllerInput name){
 	return cached_button[name];
 }
 

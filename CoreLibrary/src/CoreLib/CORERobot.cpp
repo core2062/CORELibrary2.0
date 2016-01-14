@@ -70,14 +70,14 @@ void CORESubsystem::teleopInit(void){
 void CORESubsystem::teleop(){
 	printf("Unimplemented teleop function\n");
 }
-void CORERobot::addMotor(motors motors,CANSpeedController* motor){
-	motorMap[motors] = motor;
+void CORERobot::addMotor(Motor motorID,CANSpeedController* motor){
+	motorMap[motorID] = motor;
 }
-void CORERobot::addDigitalSensor(digitalSensors digitalSensors,DigitalInput* sensor){
-	digitalSensorMap[digitalSensors] = sensor;
+void CORERobot::addDigitalSensor(DigitalSensor digitalSensorID,DigitalInput* sensor){
+	digitalSensorMap[digitalSensorID] = sensor;
 }
-void CORERobot::addAnalogSensor(analogSensors analogSensors,AnalogInput* sensor){
-	analogSensorMap[analogSensors] = sensor;
+void CORERobot::addAnalogSensor(AnalogSensor analogSensorID,AnalogInput* sensor){
+	analogSensorMap[analogSensorID] = sensor;
 }
 
 

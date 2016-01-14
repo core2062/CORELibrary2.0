@@ -11,20 +11,20 @@
 
 #include <string>
 
-enum motors{
+enum Motor{
 
 };
 
 
-enum controllerInputs{
+enum ControllerInput{
 
 };
 
-enum digitalSensors{
+enum DigitalSensor{
 
 };
 
-enum analogSensors{
+enum AnalogSensor{
 
 };
 

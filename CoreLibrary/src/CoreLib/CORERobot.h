@@ -22,9 +22,9 @@ class CORERobot {
 
 public:
 
-	std::map<motors,CANSpeedController*> motorMap;
-	std::map<digitalSensors,DigitalInput*> digitalSensorMap;
-	std::map<analogSensors,AnalogInput*> analogSensorMap;
+	CANSpeedController* motorMap[20];
+	DigitalInput* digitalSensorMap[20];
+	AnalogInput* analogSensorMap[20];
 
 
 	JoystickCache joystick;
@@ -48,9 +48,9 @@ public:
 	void teleopInit(void);
 	void teleop(void);
 	void teleopEnd(void);
-	void addMotor(motors motors,CANSpeedController* motor);
-	void addDigitalSensor(digitalSensors digitalSensors,DigitalInput* sensor);
-	void addAnalogSensor(analogSensors analogSensors,AnalogInput* sensor);
+	void addMotor(Motor motorID,CANSpeedController* motor);
+	void addDigitalSensor(DigitalSensor digitalSensorID,DigitalInput* sensor);
+	void addAnalogSensor(AnalogSensor analogSensorID,AnalogInput* sensor);
 
 	~CORERobot(){
 	}

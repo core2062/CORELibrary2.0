@@ -29,9 +29,9 @@ private:
 	    j_key( int joystick, int channel, Metadata type) : joystick( joystick ), channel(channel), type(type) {}
 	};
 
-	typedef std::map<controllerInputs, j_key> j_map;
-	typedef std::map<controllerInputs, double> d_cache;
-	typedef std::map<controllerInputs, bool> b_cache;
+	typedef std::map<ControllerInput, j_key> j_map;
+	typedef std::map<ControllerInput, double> d_cache;
+	typedef std::map<ControllerInput, bool> b_cache;
 
 public:
 	Joystick joystick1;
@@ -50,17 +50,17 @@ public:
 
 	}
 
-	void register_axis (controllerInputs name, int joystick, int axis);
+	void register_axis (ControllerInput name, int joystick, int axis);
 
-	void register_button(controllerInputs name, int joystick, int button);
+	void register_button(ControllerInput name, int joystick, int button);
 
-	void register_button(controllerInputs name, int joystick, int button, Metadata type);
+	void register_button(ControllerInput name, int joystick, int button, Metadata type);
 
 	void update_cache(void);
 
-	double axis(controllerInputs name);
+	double axis(ControllerInput name);
 
-	bool button(controllerInputs name);
+	bool button(ControllerInput name);
 
 	Joystick& get_joystick(int axis);
 
